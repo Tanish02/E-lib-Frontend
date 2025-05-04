@@ -10,7 +10,7 @@ const Navbar = () => {
               <Shape />
               <BookIcon />
             </div>
-            <span className="text-xl font-bold tracking-tight text-primary-500">
+            <span className="text-xl font-bold tracking-tight text-orange-500">
               eBook Library
             </span>
           </div>
@@ -31,8 +31,8 @@ const Shape = () => (
     width="45"
     height="45"
     viewBox="0 0 24 24"
-    fill="#FF0000"
-    stroke="#FF0000"
+    fill="#FF2222" // light red fill
+    stroke="#FF2222" // light red stroke
     strokeWidth="2"
     strokeLinecap="round"
     strokeLinejoin="round"
