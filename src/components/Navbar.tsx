@@ -2,27 +2,29 @@ import React from "react";
 
 const Navbar = () => {
   return (
-    <nav className="max-w-6xl mx-auto">
-      <div>
-        <a href={"/"}>
-          <div className="flex items-center gap-1">
-            <div className="relative">
-              <Shape />
-              <BookIcon />
+    <nav className="border-b border-gray-300">
+      <div className="max-w-7xl mx-auto flex items-center justify-between py-4 ">
+        <div>
+          <a href={"/"}>
+            <div className="flex items-center gap-1">
+              <div className="relative">
+                <Shape />
+                <BookIcon />
+              </div>
+              <span className="text-xl font-bold tracking-tight text-orange-400 transition-all hover:text-red-500 active:text-red-700 cursor-pointer">
+                eBook LIBRARY
+              </span>
             </div>
-            <span className="text-xl font-bold tracking-tight text-orange-400 transition-all hover:text-red-500 active:text-red-700 cursor-pointer">
-              eBook LIBRARY
-            </span>
-          </div>
-        </a>
-      </div>
-      <div>
-        <button className="h-10 rounded-xl bg-orange-400 px-4 py-2 text-sm font-medium text-white transition-all hover:bg-red-500 active:bg-red-700">
-          Sign in
-        </button>
-        <button className="h-10 rounded-xl bg-orange-400 px-4 py-2 text-sm font-medium text-white transition-all hover:bg-red-500 active:bg-red-700">
-          Sign up
-        </button>
+          </a>
+        </div>
+        <div className="flex items-center gap-3">
+          <button className="h-10 rounded-xl bg-orange-400 px-4 py-2 text-sm font-medium text-white transition-all hover:bg-red-500 active:bg-red-700">
+            Sign in
+          </button>
+          <button className="h-10 rounded-xl bg-orange-400 px-4 py-2 text-sm font-medium text-white transition-all hover:bg-red-500 active:bg-red-700">
+            Sign up
+          </button>
+        </div>
       </div>
     </nav>
   );
