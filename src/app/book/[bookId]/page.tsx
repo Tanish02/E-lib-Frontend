@@ -1,31 +1,48 @@
 import React from "react";
 import Image from "next/image";
 import { Book } from "@/types";
-// import DownloadButton from "./components/DownloadButton";
+import DownloadButton from "./components/DownloadButton";
 
-const SingleBookPage = async ({ params }: { params: { bookId: string } }) => {
-  console.log("params", params);
+const SingleBookPage = async ({
+  params,
+}: {
+  params: Promise<{ bookId: string }>;
+}) => {
+  const resolvedParams = await params;
+  console.log("Received route params:", resolvedParams);
+
+  const { bookId } = resolvedParams;
+  console.log("Extracted bookId:", bookId);
+
   let book: Book | null = null;
+
   try {
-    const response = await fetch(
-      `${process.env.BACKEND_URL}/books/${params.bookId}`,
-      {
-        next: {
-          revalidate: 3600,
-        },
-      }
-    );
+    console.log("Starting fetch request...");
+    const response = await fetch(`${process.env.BACKEND_URL}/books/${bookId}`, {
+      next: {
+        revalidate: 3600,
+      },
+    });
+
+    console.log("Received fetch response with status:", response.status);
+
     if (!response.ok) {
       throw new Error("Error fetching book");
     }
+
     book = await response.json();
+    console.log("Parsed book data:", book);
   } catch (err: any) {
+    console.error("Fetch failed:", err);
     throw new Error("Error fetching book");
   }
 
   if (!book) {
+    console.error("Book not found");
     throw new Error("Book not found");
   }
+
+  console.log("Rendering book page...");
 
   return (
     <div className="mx-auto grid max-w-6xl grid-cols-3 gap-10 px-5 py-10">
@@ -49,7 +66,5 @@ const SingleBookPage = async ({ params }: { params: { bookId: string } }) => {
     </div>
   );
 };
-
-// end code
 
 export default SingleBookPage;
