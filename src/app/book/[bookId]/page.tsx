@@ -3,15 +3,10 @@ import Image from "next/image";
 import { Book } from "@/types";
 import DownloadButton from "./components/DownloadButton";
 
-const SingleBookPage = async ({
-  params,
-}: {
-  params: Promise<{ bookId: string }>;
-}) => {
-  const resolvedParams = await params;
-  console.log("Received route params:", resolvedParams);
+const SingleBookPage = async ({ params }: { params: { bookId: string } }) => {
+  console.log("Received route params:", params);
 
-  const { bookId } = resolvedParams;
+  const { bookId } = params;
   console.log("Extracted bookId:", bookId);
 
   let book: Book | null = null;
@@ -19,9 +14,7 @@ const SingleBookPage = async ({
   try {
     console.log("Starting fetch request...");
     const response = await fetch(`${process.env.BACKEND_URL}/books/${bookId}`, {
-      next: {
-        revalidate: 3600,
-      },
+      next: { revalidate: 3600 },
     });
 
     console.log("Received fetch response with status:", response.status);
@@ -30,7 +23,9 @@ const SingleBookPage = async ({
       throw new Error("Error fetching book");
     }
 
-    book = await response.json();
+    const data = await response.json();
+    book = data;
+    console.log("Received book data:", book);
     console.log("Parsed book data:", book);
   } catch (err: any) {
     console.error("Fetch failed:", err);
@@ -48,7 +43,13 @@ const SingleBookPage = async ({
     <div className="mx-auto grid max-w-6xl grid-cols-3 gap-10 px-5 py-10">
       <div className="col-span-2 pr-16 text-primary-950">
         <h2 className="mb-5 text-5xl font-bold leading-[1.1]">{book.title}</h2>
-        <span className="font-semibold">by {book.author.name}</span>
+        <span className="font-semibold">
+          by{" "}
+          {typeof book.author === "string"
+            ? book.author
+            : book.author?.name || "Unknown Author"}
+        </span>
+
         <p className="mt-5 text-lg leading-8">{book.description}</p>
         <DownloadButton fileLink={book.file} />
       </div>
