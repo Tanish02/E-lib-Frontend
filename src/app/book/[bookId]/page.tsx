@@ -2,42 +2,82 @@ import React from "react";
 import Image from "next/image";
 import { Book } from "@/types";
 import DownloadButton from "./components/DownloadButton";
+import { cacheManager } from "@/utils/cacheManager";
 
 const SingleBookPage = async ({ params }: { params: { bookId: string } }) => {
-  console.log("Received route params:", params);
+  console.log("[SINGLE_BOOK] Received route params:", params);
 
   const { bookId } = params;
-  console.log("Extracted bookId:", bookId);
+  console.log("[SINGLE_BOOK] Extracted bookId:", bookId);
 
   let book: Book | null = null;
 
   try {
-    console.log("Starting fetch request...");
-    const response = await fetch(`${process.env.BACKEND_URL}/books/${bookId}`, {
-      next: { revalidate: 3600 },
+    console.log("[SINGLE_BOOK] Starting fetch request for book:", bookId);
+
+    // Use cache manager for automatic cache clearing and fresh data fetching
+    const response = await cacheManager.fetchWithCacheManagement(
+      `${process.env.BACKEND_URL}/books/${bookId}`
+    );
+
+    console.log("[SINGLE_BOOK] Received fetch response:", {
+      status: response.status,
+      statusText: response.statusText,
+      ok: response.ok,
+      bookId,
+      timestamp: new Date().toISOString(),
     });
 
-    console.log("Received fetch response with status:", response.status);
-
     if (!response.ok) {
-      throw new Error("Error fetching book");
+      console.error("[SINGLE_BOOK] Fetch failed:", {
+        status: response.status,
+        statusText: response.statusText,
+        bookId,
+      });
+      throw new Error(
+        `Error fetching book: ${response.status} ${response.statusText}`
+      );
     }
 
     const data = await response.json();
     book = data;
-    console.log("Received book data:", book);
-    console.log("Parsed book data:", book);
-  } catch (err: any) {
-    console.error("Fetch failed:", err);
-    throw new Error("Error fetching book");
+
+    console.log("[SINGLE_BOOK] Book data parsed successfully:", {
+      bookId: book?._id,
+      title: book?.title,
+      author:
+        typeof book?.author === "string" ? book.author : book?.author?.name,
+      hasDescription: !!book?.description,
+      hasCoverImage: !!book?.coverImage,
+      hasFile: !!book?.file,
+      timestamp: new Date().toISOString(),
+    });
+
+    // Log cache statistics
+    const cacheStats = cacheManager.getCacheStats();
+    console.log("[SINGLE_BOOK] Current cache statistics:", cacheStats);
+  } catch (err: unknown) {
+    console.error("[SINGLE_BOOK] Fetch failed:", {
+      error: (err as Error).message,
+      bookId,
+      timestamp: new Date().toISOString(),
+    });
+    throw new Error(`Error fetching book: ${(err as Error).message}`);
   }
 
   if (!book) {
-    console.error("Book not found");
+    console.error("[SINGLE_BOOK] Book not found:", {
+      bookId,
+      timestamp: new Date().toISOString(),
+    });
     throw new Error("Book not found");
   }
 
-  console.log("Rendering book page...");
+  console.log("[SINGLE_BOOK] Rendering book page for:", {
+    bookId: book._id,
+    title: book.title,
+    timestamp: new Date().toISOString(),
+  });
 
   return (
     <div className="mx-auto grid max-w-6xl grid-cols-3 gap-10 px-5 py-10">
