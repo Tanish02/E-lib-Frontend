@@ -1,4 +1,4 @@
-// Cache Manager Utility for automatic cache clearing and fresh data fetching
+// automatic cache clearing and fresh data fetching
 export class CacheManager {
   private static instance: CacheManager;
   private lastFetchTimestamps: Map<string, number> = new Map();
@@ -13,7 +13,7 @@ export class CacheManager {
     return CacheManager.instance;
   }
 
-  // Log cache operations with detailed information
+  // Log cache operations
   private log(
     operation: string,
     key: string,
