@@ -18,12 +18,16 @@ const Navbar = () => {
           </a>
         </div>
         <div className="flex items-center gap-3">
-          <button className="h-10 rounded-xl bg-orange-400 px-4 py-2 text-sm font-medium text-white transition-all hover:bg-red-500 active:bg-red-700">
-            Sign in
-          </button>
-          <button className="h-10 rounded-xl bg-orange-400 px-4 py-2 text-sm font-medium text-white transition-all hover:bg-red-500 active:bg-red-700">
-            Sign up
-          </button>
+          <a href="http://localhost:5173/auth/login">
+            <button className="h-10 rounded-xl bg-orange-400 px-4 py-2 text-sm font-medium text-white transition-all hover:bg-red-500 active:bg-red-700">
+              Sign in
+            </button>
+          </a>
+          <a href="http://localhost:5173/auth/register">
+            <button className="h-10 rounded-xl bg-orange-400 px-4 py-2 text-sm font-medium text-white transition-all hover:bg-red-500 active:bg-red-700">
+              Sign up
+            </button>
+          </a>
         </div>
       </div>
     </nav>
@@ -40,8 +44,8 @@ const Shape = () => (
     width="45"
     height="45"
     viewBox="0 0 24 24"
-    fill="#FF2222" // light red fill
-    stroke="#FF2222" // light red stroke
+    fill="#FF2222"
+    stroke="#FF2222"
     strokeWidth="2"
     strokeLinecap="round"
     strokeLinejoin="round"
