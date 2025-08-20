@@ -5,8 +5,16 @@ import DownloadButton from "./components/DownloadButton";
 import { cacheManager } from "@/utils/cacheManager";
 
 const SingleBookPage = async ({ params }: { params: { bookId: string } }) => {
+  // await Promise.resolve(); // Simulate async operation for server components
   const { bookId } = params;
   let book: Book | null = null;
+
+  // const SingleBookPage = async ({
+  //   params: { bookId },
+  // }: {
+  //   params: { bookId: string };
+  // }) => {
+  //   let book: Book | null = null;
 
   try {
     // Use cache manager for automatic cache clearing and fresh data fetching
