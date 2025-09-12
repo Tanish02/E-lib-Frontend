@@ -12,7 +12,7 @@ const Navbar = () => {
                 <BookIcon />
               </div>
               <span className="text-xl font-bold tracking-tight text-orange-400 transition-all hover:text-red-500 active:text-red-700 cursor-pointer">
-                eBook LIBRARY
+                e-Book LIBRARY
               </span>
             </div>
           </a>
