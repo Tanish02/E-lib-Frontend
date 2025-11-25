@@ -6,7 +6,7 @@ import { cacheManager } from "@/utils/cacheManager";
 
 const SingleBookPage = async ({ params }: { params: { bookId: string } }) => {
   // await Promise.resolve(); // Simulate async operation for server components
-  const { bookId } = params;
+  const { bookId } = await params;
   let book: Book | null = null;
 
   // const SingleBookPage = async ({
