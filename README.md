@@ -1,4 +1,4 @@
-# E-lib: A Digital Library System
+# E-lib: A Digital Resource Management System
 
 ## System Overview
 
