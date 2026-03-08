@@ -1,0 +1,4 @@
+- using vercel for frontend deployment.
+- after fixing .env Backend url and next js version errors.
+- successfully deployed.
+- https://e-lib-frontend-theta.vercel.app/
