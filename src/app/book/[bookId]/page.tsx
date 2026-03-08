@@ -1,10 +1,13 @@
-import React from "react";
-import Image from "next/image";
 import { Book } from "@/types";
-import DownloadButton from "./components/DownloadButton";
 import { cacheManager } from "@/utils/cacheManager";
+import Image from "next/image";
+import DownloadButton from "./components/DownloadButton";
 
-const SingleBookPage = async ({ params }: { params: { bookId: string } }) => {
+const SingleBookPage = async ({
+  params,
+}: {
+  params: Promise<{ bookId: string }>;
+}) => {
   // await Promise.resolve(); // Simulate async operation for server components
   const { bookId } = await params;
   let book: Book | null = null;
@@ -19,12 +22,12 @@ const SingleBookPage = async ({ params }: { params: { bookId: string } }) => {
   try {
     // Use cache manager for automatic cache clearing and fresh data fetching
     const response = await cacheManager.fetchWithCacheManagement(
-      `${process.env.BACKEND_URL}/books/${bookId}`
+      `${process.env.BACKEND_URL}/books/${bookId}`,
     );
 
     if (!response.ok) {
       throw new Error(
-        `Error fetching book: ${response.status} ${response.statusText}`
+        `Error fetching book: ${response.status} ${response.statusText}`,
       );
     }
 
