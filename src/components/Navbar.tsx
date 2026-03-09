@@ -16,12 +16,12 @@ const Navbar = () => {
           </a>
         </div>
         <div className="flex items-center gap-3">
-          <a href="/auth/login">
+          <a href="http://localhost:5173/auth/login">
             <button className="h-10 rounded-xl bg-orange-400 px-4 py-2 text-sm font-medium text-white transition-all hover:bg-red-500 active:bg-red-700">
               Sign in
             </button>
           </a>
-          <a href="/auth/register">
+          <a href="http://localhost:5173/auth/register">
             <button className="h-10 rounded-xl bg-orange-400 px-4 py-2 text-sm font-medium text-white transition-all hover:bg-red-500 active:bg-red-700">
               Sign up
             </button>
