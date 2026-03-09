@@ -108,7 +108,7 @@ Visual interface for cache management:
 ```typescript
 // Uses cache manager for automatic cache clearing
 const response = await cacheManager.fetchWithCacheManagement(
-  `${process.env.BACKEND_URL}/books`
+  `${process.env.NEXT_PUBLIC_BACKEND_URL}/books`,
 );
 ```
 
@@ -117,7 +117,7 @@ const response = await cacheManager.fetchWithCacheManagement(
 ```typescript
 // Automatic cache management with detailed logging
 const response = await cacheManager.fetchWithCacheManagement(
-  `${process.env.BACKEND_URL}/books/${bookId}`
+  `${process.env.NEXT_PUBLIC_BACKEND_URL}/books/${bookId}`,
 );
 ```
 
@@ -203,13 +203,13 @@ Add to your `.env.local`:
 
 ```env
 # Backend URL for API calls
-BACKEND_URL=https://your-backend-api.com
+NEXT_PUBLIC_BACKEND_URL=https://e-lib-backhend.onrender.com/api
 
 # Webhook API key for security
 CACHE_WEBHOOK_API_KEY=your-secure-api-key
 
 # Public backend URL for client-side operations
-NEXT_PUBLIC_BACKEND_URL=https://your-backend-api.com
+NEXT_PUBLIC_BACKEND_URL=https://e-lib-backhend.onrender.com/api
 ```
 
 ## Console Logging

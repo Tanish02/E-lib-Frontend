@@ -1,5 +1,5 @@
-import { NextRequest, NextResponse } from "next/server";
 import { cacheManager } from "@/utils/cacheManager";
+import { NextRequest, NextResponse } from "next/server";
 
 // GET - Get cache statistics
 export async function GET() {
@@ -21,7 +21,7 @@ export async function GET() {
   } catch (error) {
     console.error(
       "[CACHE_API] Error getting cache stats:",
-      (error as Error).message
+      (error as Error).message,
     );
 
     return NextResponse.json(
@@ -30,7 +30,7 @@ export async function GET() {
         error: "Failed to get cache statistics",
         timestamp: new Date().toISOString(),
       },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
@@ -65,7 +65,7 @@ export async function DELETE(request: NextRequest) {
       });
     } else {
       console.log(
-        "[CACHE_API] Invalid request - no key or all parameter provided"
+        "[CACHE_API] Invalid request - no key or all parameter provided",
       );
 
       return NextResponse.json(
@@ -75,13 +75,13 @@ export async function DELETE(request: NextRequest) {
             "Please provide either a cache key or set all=true to clear all caches",
           timestamp: new Date().toISOString(),
         },
-        { status: 400 }
+        { status: 400 },
       );
     }
   } catch (error) {
     console.error(
       "[CACHE_API] Error clearing cache:",
-      (error as Error).message
+      (error as Error).message,
     );
 
     return NextResponse.json(
@@ -90,7 +90,7 @@ export async function DELETE(request: NextRequest) {
         error: "Failed to clear cache",
         timestamp: new Date().toISOString(),
       },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
@@ -113,7 +113,7 @@ export async function POST(request: NextRequest) {
         // Trigger a fresh fetch to populate cache
         try {
           const response = await cacheManager.fetchWithCacheManagement(
-            `${process.env.BACKEND_URL}${endpoint}`
+            `${process.env.NEXT_PUBLIC_BACKEND_URL}${endpoint}`,
           );
 
           console.log("[CACHE_API] Fresh data fetched:", {
@@ -124,7 +124,7 @@ export async function POST(request: NextRequest) {
         } catch (fetchError) {
           console.warn(
             "[CACHE_API] Failed to fetch fresh data:",
-            (fetchError as Error).message
+            (fetchError as Error).message,
           );
         }
       }
@@ -151,7 +151,7 @@ export async function POST(request: NextRequest) {
   } catch (error) {
     console.error(
       "[CACHE_API] Error during force refresh:",
-      (error as Error).message
+      (error as Error).message,
     );
 
     return NextResponse.json(
@@ -160,7 +160,7 @@ export async function POST(request: NextRequest) {
         error: "Failed to refresh data",
         timestamp: new Date().toISOString(),
       },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

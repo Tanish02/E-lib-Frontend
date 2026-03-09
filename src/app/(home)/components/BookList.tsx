@@ -1,18 +1,17 @@
-import React from "react";
-import BookCard from "./BookCard";
 import { Book } from "@/types";
 import { cacheManager } from "@/utils/cacheManager";
+import BookCard from "./BookCard";
 
 const BookList = async () => {
   try {
     // Use cache manager for automatic cache clearing and fresh data fetching
     const response = await cacheManager.fetchWithCacheManagement(
-      `${process.env.BACKEND_URL}/books`
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/books`,
     );
 
     if (!response.ok) {
       throw new Error(
-        `Error occurred while fetching books: ${response.status} ${response.statusText}`
+        `Error occurred while fetching books: ${response.status} ${response.statusText}`,
       );
     }
 

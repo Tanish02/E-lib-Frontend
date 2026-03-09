@@ -17,7 +17,7 @@ export class CacheManager {
   private log(
     operation: string,
     key: string,
-    details?: Record<string, unknown>
+    details?: Record<string, unknown>,
   ) {
     const timestamp = new Date().toISOString();
     console.log(`[CACHE MANAGER] ${timestamp} - ${operation}:`, {
@@ -35,11 +35,11 @@ export class CacheManager {
 
       // Make a HEAD request to check last-modified or use a timestamp endpoint
       const response = await fetch(
-        `${process.env.BACKEND_URL}${endpoint}/last-updated`,
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}${endpoint}/last-updated`,
         {
           method: "HEAD",
           cache: "no-store",
-        }
+        },
       );
 
       if (response.ok) {
@@ -114,7 +114,7 @@ export class CacheManager {
   // Fetch data with automatic cache management
   async fetchWithCacheManagement(
     url: string,
-    options: RequestInit = {}
+    options: RequestInit = {},
   ): Promise<Response> {
     const cacheKey = url;
 
@@ -122,7 +122,7 @@ export class CacheManager {
 
     // Check if we need to update based on database changes
     const needsUpdate = await this.checkForDatabaseUpdates(
-      url.replace(process.env.BACKEND_URL || "", "")
+      url.replace(process.env.NEXT_PUBLIC_BACKEND_URL || "", ""),
     );
 
     if (needsUpdate) {

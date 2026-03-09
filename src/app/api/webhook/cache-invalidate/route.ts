@@ -1,5 +1,5 @@
-import { NextRequest, NextResponse } from "next/server";
 import { cacheManager } from "@/utils/cacheManager";
+import { NextRequest, NextResponse } from "next/server";
 
 // POST - Webhook endpoint for automatic cache invalidation
 export async function POST(request: NextRequest) {
@@ -27,7 +27,7 @@ export async function POST(request: NextRequest) {
           success: false,
           error: "Unauthorized",
         },
-        { status: 401 }
+        { status: 401 },
       );
     }
 
@@ -39,24 +39,26 @@ export async function POST(request: NextRequest) {
       case "books":
         if (resourceId) {
           // Clear specific book cache
-          cachesToClear.push(`${process.env.BACKEND_URL}/books/${resourceId}`);
+          cachesToClear.push(
+            `${process.env.NEXT_PUBLIC_BACKEND_URL}/books/${resourceId}`,
+          );
           console.log(
             "[CACHE_WEBHOOK] Clearing cache for specific book:",
-            resourceId
+            resourceId,
           );
         }
         // Always clear books list cache when any book is modified
-        cachesToClear.push(`${process.env.BACKEND_URL}/books`);
+        cachesToClear.push(`${process.env.NEXT_PUBLIC_BACKEND_URL}/books`);
         console.log("[CACHE_WEBHOOK] Clearing books list cache");
         break;
 
       case "author":
       case "authors":
         // Clear all book-related caches when author is modified
-        cachesToClear.push(`${process.env.BACKEND_URL}/books`);
+        cachesToClear.push(`${process.env.NEXT_PUBLIC_BACKEND_URL}/books`);
         if (resourceId) {
           cachesToClear.push(
-            `${process.env.BACKEND_URL}/authors/${resourceId}`
+            `${process.env.NEXT_PUBLIC_BACKEND_URL}/authors/${resourceId}`,
           );
         }
         console.log("[CACHE_WEBHOOK] Clearing author-related caches");
@@ -99,13 +101,13 @@ export async function POST(request: NextRequest) {
       try {
         // Pre-fetch books list
         await cacheManager.fetchWithCacheManagement(
-          `${process.env.BACKEND_URL}/books`
+          `${process.env.NEXT_PUBLIC_BACKEND_URL}/books`,
         );
 
         // Pre-fetch specific book if resourceId is provided
         if (resource === "book" && resourceId) {
           await cacheManager.fetchWithCacheManagement(
-            `${process.env.BACKEND_URL}/books/${resourceId}`
+            `${process.env.NEXT_PUBLIC_BACKEND_URL}/books/${resourceId}`,
           );
         }
 
@@ -113,7 +115,7 @@ export async function POST(request: NextRequest) {
       } catch (prefetchError) {
         console.warn(
           "[CACHE_WEBHOOK] Failed to pre-fetch fresh data:",
-          (prefetchError as Error).message
+          (prefetchError as Error).message,
         );
       }
     }
@@ -130,7 +132,7 @@ export async function POST(request: NextRequest) {
   } catch (error) {
     console.error(
       "[CACHE_WEBHOOK] Error processing webhook:",
-      (error as Error).message
+      (error as Error).message,
     );
 
     return NextResponse.json(
@@ -139,7 +141,7 @@ export async function POST(request: NextRequest) {
         error: "Failed to process cache invalidation webhook",
         timestamp: new Date().toISOString(),
       },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
