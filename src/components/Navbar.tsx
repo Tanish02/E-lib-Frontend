@@ -1,5 +1,3 @@
-import React from "react";
-
 const Navbar = () => {
   return (
     <nav className="border-b border-gray-300">
@@ -18,12 +16,12 @@ const Navbar = () => {
           </a>
         </div>
         <div className="flex items-center gap-3">
-          <a href="http://localhost:5173/auth/login">
+          <a href="/auth/login">
             <button className="h-10 rounded-xl bg-orange-400 px-4 py-2 text-sm font-medium text-white transition-all hover:bg-red-500 active:bg-red-700">
               Sign in
             </button>
           </a>
-          <a href="http://localhost:5173/auth/register">
+          <a href="/auth/register">
             <button className="h-10 rounded-xl bg-orange-400 px-4 py-2 text-sm font-medium text-white transition-all hover:bg-red-500 active:bg-red-700">
               Sign up
             </button>
