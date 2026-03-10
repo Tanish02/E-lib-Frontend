@@ -3,6 +3,8 @@
 E-lib is a full-stack application designed to manage and share digital resources.
 The system consists of a backend API, a public frontend for browsing resources, and a private dashboard for managing content.
 
+## 🔗 Live Demo: https://e-lib-frontend-puce.vercel.app/
+
 ## 📸 Screenshots
 
 ### Homepage
