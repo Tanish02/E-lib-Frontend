@@ -22,8 +22,14 @@ const Banner = () => {
           sizes="100vw"
           style={{ width: "auto", height: "18rem" }}
         />
-        <h3 className="absolute left-10 top-1/2 w-full max-w-3xl -translate-y-1/2 text-5xl font-semibold tracking-tight text-white">
-          Online Resource Hub...
+        <h3 className="absolute left-10 top-1/2 w-full max-w-3xl -translate-y-1/2 text-white">
+          <span className="block text-5xl font-semibold tracking-tight">
+            Online Resource Hub
+          </span>
+
+          <span className="mt-3 block text-lg text-gray-200">
+            Manage and share useful digital resources
+          </span>
         </h3>
       </div>
     </div>
