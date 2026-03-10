@@ -1,7 +1,9 @@
 const Footer = () => {
   return (
     <footer className="border-t p-5 text-center">
-      <span>E-Lib — Online Resource Management System with cloudinary</span>
+      <span>Online Resource Management System</span>
+      <span>Built with Node.js, React & Cloudinary</span>
+      <span>© 2026 Tanish Sharma</span>
     </footer>
   );
 };
@@ -9,3 +11,5 @@ const Footer = () => {
 // end code
 
 export default Footer;
+
+<span></span>;
