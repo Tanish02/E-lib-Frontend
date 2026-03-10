@@ -1,5 +1,22 @@
 # E-lib: A Digital Resource Management System
 
+E-lib is a full-stack application designed to manage and share digital resources.
+The system consists of a backend API, a public frontend for browsing resources, and a private dashboard for managing content.
+
+## 📸 Screenshots
+
+### Homepage
+
+![Homepage](screenshots/1.png)
+
+### Resource Details Page
+
+![Resource Details](screenshots/2.png)
+
+### Login Page
+
+![Login Page](screenshots/3.png)
+
 ## System Overview
 
 E-lib is a multi-repository, full-stack application designed to function as a digital library. The system is composed of three distinct but interconnected components: a backend API, a public-facing frontend for browsing, and a private dashboard for content management. These components are designed to work together and are not intended for standalone use.
@@ -9,12 +26,10 @@ E-lib is a multi-repository, full-stack application designed to function as a di
 The system operates with a classic client-server architecture. The Backend serves as the central API and data authority, while the Frontend and Dashboard act as clients.
 
 - **Backend (`E-lib-Backend`)**
-
   - **Purpose**: Acts as the central nervous system for the E-lib application. It handles all business logic, data persistence, file storage, and authentication.
   - **Functionality**: Exposes a RESTful API for book and user management (CRUD operations). Manages user authentication (JWT) and authorization. Interfaces with a database (e.g., MongoDB) and a cloud storage provider (e.g., Cloudinary) for book files and cover images.
 
 - **Public Frontend (`E-lib-Frontend`)**
-
   - **Purpose**: Provides a read-only, public-facing interface for users to browse and download books. This is the repository where this README is located.
   - **Functionality**: Consumes the Backend API to display a list of books and their details. Implements a server-side caching layer with webhook-based invalidation to ensure data freshness while minimizing API calls. No authentication is required for access.
 
@@ -27,7 +42,6 @@ The system operates with a classic client-server architecture. The Backend serve
 The system utilizes different technologies for each component, chosen to fit their specific roles.
 
 - **Backend (`E-lib-Backend`)**
-
   - **Runtime**: Node.js
   - **Framework**: Express.js
   - **Language**: TypeScript
@@ -35,7 +49,6 @@ The system utilizes different technologies for each component, chosen to fit the
   - **File Storage**: Cloudinary (inferred)
 
 - **Public Frontend (`E-lib-Frontend`)**
-
   - **Framework**: Next.js, React
   - **Language**: TypeScript
   - **Styling**: Tailwind CSS
@@ -51,7 +64,6 @@ The system utilizes different technologies for each component, chosen to fit the
 To run the entire system locally, each of the three components must be installed and running concurrently.
 
 - **Prerequisites**
-
   - Node.js
   - npm (or a compatible package manager)
   - Access to all three repositories (`E-lib-Backend`, `E-lib-Frontend`, `E-lib-Dashboard`).
