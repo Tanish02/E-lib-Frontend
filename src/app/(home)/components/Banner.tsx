@@ -1,4 +1,3 @@
-import React from "react";
 import Image from "next/image";
 
 const Banner = () => {
@@ -24,7 +23,7 @@ const Banner = () => {
           style={{ width: "auto", height: "18rem" }}
         />
         <h3 className="absolute left-10 top-1/2 w-full max-w-3xl -translate-y-1/2 text-5xl font-semibold tracking-tight text-white">
-          Share & Trade Your Favourite Reads...
+          Online Resource Hub...
         </h3>
       </div>
     </div>
