@@ -1,7 +1,7 @@
 "use client";
 
-import React from "react";
 import { useCacheManager } from "@/hooks/useCacheManager";
+import React from "react";
 
 const CacheControl: React.FC = () => {
   const {
@@ -79,7 +79,7 @@ const CacheControl: React.FC = () => {
                     <span className="text-xs text-gray-600 truncate flex-1 mr-2">
                       {key.replace(
                         process.env.NEXT_PUBLIC_BACKEND_URL || "",
-                        "..."
+                        "...",
                       )}
                     </span>
                     <button
@@ -138,4 +138,8 @@ const CacheControl: React.FC = () => {
   );
 };
 
+// end code
+
 export default CacheControl;
+
+// catch UI for debug purpose user control disabled right now
